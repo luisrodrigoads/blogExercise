@@ -1,9 +1,31 @@
 <%- include("./partials/header") %>
-<div id="titulo">
-    <h1>Pagina Inicial</h1>
-</div>
-<hr>
-<div id="titulo">
-    <a href="/otherPage"><button>Pagina 2</button></a>
-</div>
+
+    <nav class="navbar navbar-dark bg-dark ">
+            
+        <a class="navbar-brand" href="/addArticlePage">
+        +
+        </a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="/loginPage">
+                    Login
+                </a>
+            </li>
+        </ul>      
+    </nav>
+    <div class="container-fluid" >
+        <% articles.forEach(function(article){%>
+
+        <div class="row" >
+            <div class="col-md-6 offset-md-3 rounded divArticle" >
+                <h2><%= article.title;%></h2>
+                <hr>
+                <p style="text-align: justify"><%= article.description;%></p>    
+            </div>
+        </div>
+
+        <%});%>
+
+    </div>
+
 <%- include("./partials/footer") %>

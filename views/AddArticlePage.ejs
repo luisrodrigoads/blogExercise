@@ -1,0 +1,32 @@
+<%- include("./partials/header") %>
+    <nav class="navbar navbar-dark bg-dark ">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="/">
+                    Voltar
+                </a>
+            </li>
+        </ul>      
+    </nav>
+    <div class="container-fluid" >
+        <div class="row" >
+                <div class="col-md-6 offset-md-3 rounded divArticle">
+                    <h2>Adicionar Artigo</h2>
+                    <hr>
+                    <form action="/createArticle" method="POST">
+                        <div class="form-group">
+                            <label for="title">Titulo</label>
+                            <input type="text" name="title" class="form-control" placeholder="Titulo" id="title" >
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Texto</label>
+                            <textarea name="description" class="form-control" id="description" rows="7"></textarea>
+                        </div>
+                        <button id="bt_cadastra" class="btn btn-secondary">Salvar</button>
+                    </form>
+                </div>
+        </div>
+       
+
+    </div>
+<%- include("./partials/footer") %>
