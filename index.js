@@ -10,7 +10,7 @@ var bodyparser = require("body-parser");
 const port = process.env.PORT || "3000";
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/blogDB",{useNewUrlParser:true});
+mongoose.connect("mongodb://localhost/blogDB",{useNewUrlParser:true,useUnifiedTopology: true});
 
 app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended:true}));
@@ -46,6 +46,38 @@ var Article = mongoose.model("Article",articleSchema);
     res.render('AddArticlePage.ejs');
  });
 
+ app.get('/article/:id',function(req,res){
+   Article.findById(req.params.id, function(err, article){
+      if(err){
+         console.log(err);
+      }else{
+         res.redirect('/');
+      }
+   });
+ });
+
+ app.get('/article/:id/edit',function(req,res){
+   Article.findById(req.params.id,function(err, article){
+      if(err){
+         console.log(err);
+      }else{
+         res.render('editArticle.ejs',{article});
+      }
+   })
+ });
+
+ app.put('/article/:id',function(req,res){
+   var title = req.body.title;
+   var description = req.body.description;
+   Article.findByIdAndUpdate(req.params.id, {title: title,description: description}, function(err,article){
+      if(err){
+         console.log(err);
+      }else{
+         res.redirect('/article/'+req.params.id);
+      }
+   });
+ });
+
  app.post('/createArticle',function(req,res){
    var title = req.body.title;
    var description = req.body.description;
@@ -64,6 +96,16 @@ var Article = mongoose.model("Article",articleSchema);
          res.redirect('/');
       });
    }
+ });
+
+ app.delete('/article/:id',function(req,res){
+   Article.findByIdAndRemove(req.params.id, function(err){
+      if(err){
+         console.log(err);
+      }else{
+         res.redirect('/');
+      }
+   });
  });
 
 /**

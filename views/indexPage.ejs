@@ -3,7 +3,9 @@
     <nav class="navbar navbar-dark bg-dark ">
             
         <a class="navbar-brand" href="/addArticlePage">
-        +
+            <button class="btn btn-success btn-circle">
+                + add
+            </button>
         </a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -21,6 +23,12 @@
                 <h2><%= article.title;%></h2>
                 <hr>
                 <p style="text-align: justify"><%= article.description;%></p>    
+                <div class="row divButtonsIndexPage" >
+                    <a href="/article/<%= article._id %>/edit"><button class="btn btn-warning" ><text style="color: white">Editar</text></button></a>
+                    <form id="formApagar" action="/article/<%= article._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Apagar</button>
+                    </form>
+                </div>    
             </div>
         </div>
 
